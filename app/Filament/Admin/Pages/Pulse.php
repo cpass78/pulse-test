@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Admin\Pages;
 
-use Filament\Pages\Page;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseCache;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseExceptions;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseQueues;
@@ -15,14 +14,22 @@ use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Pages\Dashboard\Concerns\HasFiltersAction;
 use Filament\Support\Enums\ActionSize;
+use Illuminate\Contracts\Support\Htmlable;
 
 class Pulse extends \Filament\Pages\Dashboard
 {
     use HasFiltersAction;
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.pulse';
-//    protected static string $routePath = 'pulse';
+    
+    public function getTitle(): string | Htmlable
+    {
+        return __('Pulse Dashboard');
+    }
+    
+    protected static ?string $navigationLabel = 'Pulse Dashboard';
+    protected static ?string $navigationIcon = 'heroicon-o-home';
+    
+    protected static string $routePath = 'pulse';
 
     public function getColumns(): int|string|array
     {
@@ -34,11 +41,11 @@ class Pulse extends \Filament\Pages\Dashboard
         return [
             ActionGroup::make([
                 Action::make('1h')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard'))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.pulse'))),
                 Action::make('24h')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard', ['period' => '24_hours']))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.pulse', ['period' => '24_hours']))),
                 Action::make('7d')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard', ['period' => '7_days']))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.pulse', ['period' => '7_days']))),
             ])
                 ->label(__('Filter'))
                 ->icon('heroicon-m-funnel')
