@@ -34,7 +34,7 @@ class Pulse extends \Filament\Pages\Dashboard
         return [
             ActionGroup::make([
                 Action::make('1h')
-                    ->action(fn() => $this->redirect(route('vendor.manager.pages.dashboard'))),
+                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard'))),
                 Action::make('24h')
                     ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard', ['period' => '24_hours']))),
                 Action::make('7d')
